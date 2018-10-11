@@ -1,0 +1,67 @@
+<style>
+    ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+        color: #000 !important;
+    }
+    input[type="text"]
+    {
+        color:#000 !important;
+    }
+    .item-input-wrapper
+    {
+        color: #000 !important;
+        border-bottom: 1px solid #ddd;
+        border-top: 1px solid #ddd;
+        border-radius: 0px;
+        height: 44px !important;
+        background: none !important;
+    }
+    .button
+    {
+        border-radius: 0px;
+        height: 44px !important;
+    }
+
+</style>
+<ion-view view-title="Question/Answer">
+    <ion-content class="has-header">
+        <ion-list>
+            <form name="ansForm" id="ansForm" ng-submit="answerQuestion(ansForm, data)" novalidate>
+                <div class="item item-input-inset">
+                    <label class="item-input-wrapper">
+                        <input type="text" placeholder="Enter answer..." name="answer" ng-model="data.answer" required>
+                    </label>
+                    <button class="button button-small button-stable padding" type="submit">
+                        <i class="ion-edit" style="font-size:22px"></i>
+                    </button>
+                </div>
+                <div class="assertive" ng-if="ansForm.$submitted" ng-show="ansForm.answer.$error.required">!This Field is required</div>
+            </form>
+        </ion-list>
+        <ion-list>
+            <div class="category-items padding item-text-wrap">
+                Q) {{ques.post_title}}
+            </div>
+        </ion-list>
+        <ion-list id="myList">
+            <div class="category-items padding item-text-wrap" ng-repeat="y in answer">
+                <div class="row">
+                    <div class="col col-25">
+                        <img src="img/user.svg" height="50" width="50" alt="user.svg" />
+                    </div>
+                    <div class="col col-50">
+                        {{y.comment_content}}
+                    </div>
+                    <div class="col col-25">
+                        <!--                        {{ID}}{{y.user_id}}-->
+                        
+                        <button class="button ion-close button-assertive" ng-if="y.user_id ==ID" ng-click="deletePersonelComments({{y.comment_ID}})" style="float:right !important"> </button>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col col-50"><span class="royal"><small><strong><i class="ion-person"></i>&nbsp;{{y.comment_author}}</strong></small></span></div>
+                    <div class="col col-50" style="text-align:right !important"><span class="royal"><small><strong><i class="ion-calendar"></i>&nbsp;{{y.date}}</strong></small></span></div>
+                </div>
+            </div>
+        </ion-list>
+    </ion-content>
+</ion-view>

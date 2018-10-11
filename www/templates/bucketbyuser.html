@@ -1,0 +1,24 @@
+<ion-view view-title="User Bucket's">
+    <ion-content class="has-header">
+        <ion-scroll direction="y">
+            <div class="card" ng-repeat="x in userbucket">
+                <ion-item class="category-ion-item">
+                    <div class="row padding">
+                        <div class="col" ng-if="x.userimage != ''"><img class="user-avatar" src="http://www.thefreespiritproject.org/app/uploads/user/{{ x.userimage}}" alt="{{ x.image}}"
+                                                                       width="60px" height="60px" ng-click="getUserBucket({{x.userid}})"></div>
+                        <div class="col" ng-if="x.userimage == ''"><img class="user-avatar" src="img/user.svg" alt="user"
+                                                                       width="60px" height="60px" ng-click="getUserBucket({{x.userid}})"></div>
+                        <div class="col col-75 item item-text-wrap"><b>{{ x.author}}</b> added a new goal!<br><strong><small><i
+                                        class="icon ion-calendar"></i>&nbsp;{{ x.date}}</small></strong><spann><h1 style="float:right" ng-if="(x.comp !=0) && (x.total_todo !=0)">{{((x.comp/x.total_todo)*100)}}%</h1><h1 style="float:right" ng-if="(x.comp ==0) && (x.total_todo !=0)">0%</h1></spann></div>
+                    </div>
+                    <div class="row padding">
+                        <div class="col col-25">&nbsp;</div>
+                        <div class="col-25 col-offset-10"><span style="background-color:#136B7C; color:#fff; padding: 5px; border-radius: 5px;">{{ x.title | limitTo:numlimit}}.....</span><br><img class="user-avatar" src="{{ x.image}}" alt="{{ x.image}}"
+                                                                                                                                                                                                    width="106px" height="97px" ng-click="getData({{x.ID}})"></div>
+                    </div>
+
+                </ion-item>
+            </div>
+        </ion-scroll>
+    </ion-content>
+</ion-view>

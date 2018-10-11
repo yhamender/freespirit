@@ -1,0 +1,180 @@
+<style>
+    .item
+    {
+        padding:1px !important;
+    }
+    input[type="text"]
+    {
+        color:#000 !important;
+    }
+    input[type="date"]
+    {
+        color:#000 !important;
+    }
+    .border
+    {
+        border: 1px solid #ddd !important;
+        width: 96% !important;
+    }
+    ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+        color: #000 !important;
+    }
+    .profile-picture {
+        border: 1px solid rgba(0, 0, 0, 0.25);
+        /*        border-radius: 50%;*/
+        padding: 3px;
+        -webkit-box-sizing: content-box;
+        -moz-box-sizing: content-box;
+        box-sizing: content-box;
+        margin: 0 auto;
+        width: 100px;
+        height: 100px;
+        overflow: hidden;
+    }
+
+    .profile-picture img {
+        width: 100px;
+        height: 100px;
+        /*        border-radius: 50%;*/
+    }
+
+    .profile-name {
+        padding-top: 20px;
+        font-size: x-large !important;
+        font-weight: bold !important;
+        text-transform: capitalize;
+    }
+	.category-items .item-content {
+    padding: 7px;
+    width: 100%;
+    min-width: 343px;
+   }
+</style>
+<ion-view view-title="EDIT YOUR BUCKETLIST">
+    <ion-pane>
+        <ion-content class="has-header">
+            <!--            <ion-list class="list">
+                            <ion-item class="category-ion-item">
+                                <progress id="progressbar" max="100" value="23" class="progress"> 
+                            </ion-item>
+                        </ion-list>-->
+            <ion-list class="list">
+                <ion-item class="profile-item" ng-click="takepic()">
+                    <div class="profile-picture big-profile-picture" ng-if="record.bucketimage==''">
+                        <img src="{{editimage}}" alt="User Image" >
+                    </div>
+                    <div class="profile-picture big-profile-picture" ng-if="record.bucketimage!=''">
+                        <img src="http://www.thefreespiritproject.org/app/uploads/{{record.bucketimage}}" alt="User Image">
+                    </div>
+                </ion-item>
+                <ion-item class="category-ion-item">
+                    <div class="row row-wrap category-items padding" style="font-size:14px">
+                        <strong>1.&nbsp;BUCKET PROGRESS&nbsp;({{progress}}%)</strong>
+                    </div>
+                </ion-item>
+                <ion-item class="category-ion-item">
+                    <div class="row row-wrap category-items padding">
+                        <progress id="progressbar" max="100" value="{{progress}}" class="progress"> </progress>
+                    </div>
+                </ion-item>
+                <ion-item class="category-ion-item">
+                    <div class="row row-wrap category-items padding" style="font-size:14px">
+                        <strong>2.&nbsp;BUCKET NAME</strong>
+                    </div>
+                </ion-item>
+                <ion-item class="category-ion-item">
+                    <div class="row row-wrap category-items padding" style="font-size:14px">
+                        <input type="text" class="border" name="name" ng-model="record.title"   ng-value="record.title" />
+
+                    </div>
+                </ion-item>
+                <ion-item class="category-ion-item">
+                    <div class="row row-wrap category-items padding" style="font-size:14px">
+                        <strong>3.&nbsp;BUCKET CATEGORY</strong>
+                    </div>
+                </ion-item>
+                <ion-item class="category-ion-item">
+                    <div class="row row-wrap category-items padding" style="font-size:14px">
+                        <div data-tap-disabled="true">
+                            <select ng-options="item as item.label for item in items track by item.id" ng-model="record.selected" required>
+                                <!--                                <option value="">Select</option>
+                                                                <option value="18" ng-selected="true">Health</option>
+                                                                <option value="19">Sports</option>
+                                                                <option value="20">Travel</option>
+                                                                <option value="21">Learn</option>
+                                                                <option value="22">Career/Wealth</option>
+                                                                <option value="23">Relationships</option>-->
+                            </select>
+                        </div>
+                    </div>
+                </ion-item>
+                <ion-item class="category-ion-item">
+                    <div class="row row-wrap category-items padding" style="font-size:14px">
+                        <strong>4.&nbsp;GOAL DATE</strong>
+                    </div>
+                </ion-item>
+                <ion-item class="category-ion-item">
+                    <div class="row row-wrap category-items padding" style="font-size:14px">
+                        <!-- {{record.date}} -->
+                        <!--                        <input type="text" class="border" name="name"   ng-value="record.date" ng-click="datepicker()"/>-->
+                        <input type="text" onfocus="(this.type = 'date')" class="border" placeholder="Goal Date.." name="gdate" ng-model="record.date" required>
+                    </div>
+                </ion-item>
+                <ion-item class="category-ion-item">
+                    <div class="row row-wrap category-items padding" style="font-size:14px">
+                        <strong>5.&nbsp;PUBLIC/PRIVATE</strong>
+                    </div>
+                </ion-item>
+                <ion-item class="category-ion-item">
+                    <div class="row row-wrap category-items padding" style="font-size:14px">
+                        <div data-tap-disabled="true">
+                            <select ng-options="item as item.label for item in options track by item.id" ng-model="record.pp" required></select>
+                        </div>
+                    </div>
+                </ion-item>
+                <ion-item class="category-ion-item">
+                    <div class="row row-wrap category-items padding" style="font-size:14px">
+                        <strong>6.&nbsp;TO-DO LIST (COMPLETED)</strong>
+                    </div>
+                </ion-item>
+                <ion-item class="category-ion-item" ng-repeat="y in item track by $index">
+                    <div class="row row-wrap category-items padding" style="font-size:14px">
+                        <div class="col col-75">
+<!--                            <ion-checkbox ng-model="radio[$index]" ng-value="{{value}}" ng-if="value == 1" ng-checked="true" ng-disabled="true">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{key}}</ion-checkbox>
+                        <ion-checkbox ng-model="radio[$index]" ng-value="{{value}}" ng-if="value == 0" ng-checked="false" ng-disabled="false">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{y}}</ion-checkbox>-->
+                        <!--<ion-checkbox ng-model="radio[$index]" ng-value="arr[$index]" ng-if="arr[$index] == 1" ng-checked="true" ng-disabled="true">-->
+						<ion-checkbox ng-model="radio[$index]" ng-value="arr[$index]" ng-if="arr[$index] == 1" ng-checked="true" ng-click="updateTodoStatus(idarr[$index])">
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{y}}</ion-checkbox>
+                        <ion-checkbox ng-model="radio[$index]" ng-value="arr[$index]" ng-if="arr[$index] == 0" ng-checked="false" ng-disabled="false" ng-click="updateTodoStatus(idarr[$index])">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{y}}</ion-checkbox>
+                        </div>
+                        <div class="col-25">
+                            <button class="button button-assertive button-small" ng-if="arr[$index] == 0" ng-show="true" ng-click="removeTodoItem(idarr[$index],record.ID);"><small>Delete item</small></button>
+                            
+                        </div>
+                    </div>
+                </ion-item>
+                <ion-item class="category-ion-item">
+                    <div class="row row-wrap category-items padding" style="font-size:14px">
+                        <strong>7.&nbsp;ADD NEW TO-DO LIST ITEM</strong>
+                    </div>
+                </ion-item>
+                <ion-item class="category-ion-item">
+                    <div class="row row-wrap category-items padding" style="font-size:14px">
+                        <button class="button button-dark button-block button-small" ng-click="addFiled();">Add Item</button>
+
+                    </div>
+                </ion-item>
+                <ion-item class="category-ion-item" ng-repeat="choice in choices track by $index">
+                    <div class="row row-wrap category-items padding">
+                        <div class="col col-75"><input type="text" class="border" name="list[]" ng-model="choice.list" placeholder="Add Item..." /></div>
+                        <div class="col-25"><button class="button button-assertive button-small remove" ng-click="removeFiled()"><small>Remove</small></button></div>
+                    </div>
+                </ion-item>
+            </ion-list>
+            <!--            <button class="button button-full button-positive" ng-click="updateTodo({{record.BUCKET}}); updateBucket({{record}}); addNewTodo();">-->
+            <button class="button button-full button-positive" ng-click="addNewTodo(record.ID);updateBucket(record);">
+                Update Bucket List Goal
+            </button>
+        </ion-content>
+    </ion-pane>
+</ion-view>

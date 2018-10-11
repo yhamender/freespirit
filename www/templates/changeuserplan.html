@@ -1,0 +1,19 @@
+<ion-view view-title="Change Your Plan">
+    <ion-content class="has-header">
+        <div class="list list-inset">
+            <form name="planform" novalidate id="goalFrm" ng-submit="changeIdea(planform, data)">
+                <label class="item item-input item-select">
+                    <span class="input-label">PLAN</span>
+                    <div data-tap-disabled="true">
+                        <select ng-model="data.category" name="category" required>
+                            <option value="">Select Plan</option>
+                            <option value="2">Pro Plan</option>
+                            <option value="3">Premium Plan</option>
+                        </select>
+                    </div>
+                </label>
+                <button class="button button-positive button-full" type="submit">UPDATE</button>
+            </form>
+        </div>
+    </ion-content>
+</ion-view>

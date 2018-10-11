@@ -1,0 +1,18 @@
+<ion-modal-view>
+	<ion-header-bar class="bar-stable">
+		<h1 class="title">Sort By</h1>
+        <button class="button buttom-small modal-select-close-button ion-close" ng-click="closeModal()"></button>
+	</ion-header-bar>
+
+	<ion-content scroll="false">
+		<ion-list>
+		  <ion-item><a class="item-content" ng-click="record(1);">GOAL DATE</a></ion-item>
+		  <ion-item><a class="item-content" ng-click="record(2);">DATE ADDED</a></ion-item>
+		  <ion-item><a class="item-content" ng-click="record(3);">ALPHABETICALLY</a></ion-item>
+		  <ion-item><a class="item-content" ng-click="record(4);">NOT-STARTED</a></ion-item>
+		  <ion-item><a class="item-content" ng-click="record(5);">STARTED</a></ion-item>
+		  <ion-item><a class="item-content" ng-click="record(6);">COMPLETED</a></ion-item>
+		</ion-list>
+	</ion-content>
+
+</ion-modal-view>
